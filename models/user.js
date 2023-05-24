@@ -87,9 +87,9 @@ class User {
 
     });
 
+    console.log(updatedCartItems)
 
-
-    updatedCartItems = updatedCartItems.splice(cartProductIndex, 1);
+    updatedCartItems.splice(cartProductIndex, 1);
 
 
 
