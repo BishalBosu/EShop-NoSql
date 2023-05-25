@@ -14,7 +14,11 @@ const userschema = new Schema({
 	cart: {
 		items: [
 			{
-				productId: { type: Schema.Types.ObjectId, required: true },
+				productId: {
+					type: Schema.Types.ObjectId,
+					ref: "Product",
+					required: true,
+				},
 				quantity: { type: Number, required: true },
 			},
 		],
@@ -41,7 +45,22 @@ userschema.methods.addToCart = function (product) {
 
 	const updatedCart = { items: updatedCartItems }
 
-    this.cart = updatedCart;
+	this.cart = updatedCart
+
+	return this.save()
+}
+
+userschema.methods.deleteCartItemById = function (prodId) {
+	let updatedCartItems = [...this.cart.items]
+	const cartProductIndex = this.cart.items.findIndex((cp) => {
+		return cp.productId.toString() === prodId.toString()
+	})
+
+	updatedCartItems.splice(cartProductIndex, 1)
+
+	const updatedCart = { items: updatedCartItems }
+
+	this.cart = updatedCart
 
 	return this.save()
 }
