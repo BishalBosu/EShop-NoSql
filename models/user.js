@@ -51,16 +51,14 @@ userschema.methods.addToCart = function (product) {
 }
 
 userschema.methods.deleteCartItemById = function (prodId) {
-	let updatedCartItems = [...this.cart.items]
-	const cartProductIndex = this.cart.items.findIndex((cp) => {
-		return cp.productId.toString() === prodId.toString()
+	
+	const updatedCartItems = this.cart.items.filter((item) => {
+		return item.productId.toString() !== prodId.toString();
 	})
 
-	updatedCartItems.splice(cartProductIndex, 1)
+	
 
-	const updatedCart = { items: updatedCartItems }
-
-	this.cart = updatedCart
+	this.cart.items = updatedCartItems;
 
 	return this.save()
 }

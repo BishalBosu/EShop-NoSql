@@ -67,7 +67,7 @@ exports.postCart = (req, res, next) => {
 		})
 		.then((result) => {
 			res.redirect("/cart")
-			console.log(result)
+			//console.log(result)
 		})
 		.catch((err) => {
 			console.log(err)
