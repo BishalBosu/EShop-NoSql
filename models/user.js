@@ -1,12 +1,27 @@
-// const mongoose =require('mongoose')
+const mongoose = require("mongoose")
 
-// const
+const Schema = mongoose.Schema
 
+const userschema = new Schema({
+	name: {
+		type: String,
+		required: true,
+	},
+	email: {
+		type: String,
+		required: true,
+	},
+	cart: {
+		items: [
+			{
+				productId: { type: Schema.Types.ObjectId, required: true },
+				quantity: { type: Number, required: true },
+			},
+		],
+	},
+})
 
-
-
-
-
+module.exports = mongoose.model("User", userschema)
 
 // const mongodb = require('mongodb')
 // const getDb = require('../util/database').getDb;
@@ -18,7 +33,6 @@
 //     this.cart = cart; // {items: []}
 //     this._id = id ? new mongodb.ObjectId(id) : null;
 //   }
-
 
 //   save() {
 //     const db = getDb();
@@ -51,7 +65,6 @@
 //       updatedCartItems.push({ productId: new mongodb.ObjectId(product._id), quantity: newQuantity });
 //     }
 
-
 //     const updatedCart = { items: updatedCartItems };
 
 //     const db = getDb();
@@ -72,7 +85,6 @@
 //       return i.productId;
 //     })
 
-
 //     return db.collection('products')
 //       .find({ _id: { $in: productIds } })
 //       .toArray()
@@ -85,7 +97,6 @@
 //           }
 //         })
 //       });
-
 
 //   }
 
@@ -100,8 +111,6 @@
 //     console.log(updatedCartItems)
 
 //     updatedCartItems.splice(cartProductIndex, 1);
-
-
 
 //     const updatedCart = { items: updatedCartItems };
 
@@ -151,11 +160,7 @@
 //     .find({ 'user._id': this._id })
 //     .toArray();
 
-
-
-
 //   }
-
 
 //   static findUserById(userId) {
 //     const db = getDb();
@@ -170,15 +175,8 @@
 //         console.log(err);
 //       })
 
-
 //   }
 
-
 // }
-
-
-
-
-
 
 // module.exports = User;
